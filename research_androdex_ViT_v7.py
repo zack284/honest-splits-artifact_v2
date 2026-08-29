@@ -27,12 +27,11 @@ from torch.optim.lr_scheduler import LambdaLR
 
 parser = argparse.ArgumentParser(description='SSL')
 # default settings
-parser.add_argument('--root', default='D:\code\BUSI', type=str)
 #parser.add_argument('--backbone', default='resnet101', type=str)
 parser.add_argument('--backbone', default='ViT', type=str)
-#parser.add_argument('--labeled_id_path', default='/mnt/d/Data/Androdex/Images/Set1_split_1_2/set1_train_labeled.txt', type=str)
-#parser.add_argument('--unlabeled_id_path', default='/mnt/d/Data/Androdex/Images/Set1_split_1_2/set1_train_unlabeled.txt', type=str)
-#parser.add_argument('--val_id_path', default='/mnt/d/Data/Androdex/Images/Set1_split_1_2/set1_val.txt', type=str)
+#parser.add_argument('--labeled_id_path', default='Androdex/Images/Set1_split_1_2/set1_train_labeled.txt', type=str)
+#parser.add_argument('--unlabeled_id_path', default='ndrodex/Images/Set1_split_1_2/set1_train_unlabeled.txt', type=str)
+#parser.add_argument('--val_id_path', default='Androdex/Images/Set1_split_1_2/set1_val.txt', type=str)
 
 #parser.add_argument('--labeled_id_path',   default='./splits_ssl/train_labeled.txt', type=str)
 #parser.add_argument('--unlabeled_id_path', default='./splits_ssl/train_unlabeled.txt', type=str)
@@ -155,14 +154,12 @@ def main(gpu, args):
         ema = EMA(model, 0.999)
     
     if args.co_train:
-        #optimizers = {'a':SGD(model.branch1.parameters(), lr=args.base_lr, momentum=0.9, weight_decay=1e-4),\
-        #              'b':SGD(model.branch2.parameters(), lr=args.base_lr, momentum=0.9, weight_decay=1e-4)}
 
         optimizers = {'a':torch.optim.AdamW(model.branch1.parameters(), lr=1e-4, weight_decay=0.05,eps=1e-8),\
                       'b':torch.optim.AdamW(model.branch2.parameters(), lr=1e-4, weight_decay=0.05,eps=1e-8)}
-        #optimizer = torch.optim.AdamW(model.parameters(), lr=1e-4, weight_decay=0.05)
+
     else:
-        #optimizers = SGD(model.parameters(), lr=args.base_lr, momentum=0.9, weight_decay=1e-4)
+
         optimizers = torch.optim.AdamW(model.parameters(), lr=1e-4, weight_decay=0.05,eps=1e-8) 
 
 
