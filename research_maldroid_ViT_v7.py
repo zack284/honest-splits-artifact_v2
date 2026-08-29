@@ -26,8 +26,6 @@ from torch.optim.lr_scheduler import LambdaLR
 
 parser = argparse.ArgumentParser(description='SSL')
 # default settings
-parser.add_argument('--root', default='D:\code\BUSI', type=str)
-
 parser.add_argument('--backbone', default='ViT', type=str)
 
 
