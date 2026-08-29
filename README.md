@@ -138,3 +138,29 @@ runs vary within the standard deviations given in the paper.
   redistribution terms of those datasets.
 
 
+## Omitted Dependencies
+
+The training scripts (`research_maldroid_ViT_v7.py`,
+`research_androdex_ViT_v7.py`) depend on a small set of internal helper
+modules (e.g., data-loading and metric utilities) that are entangled
+with a separate, unrelated research codebase. To preserve anonymity and
+keep this artifact scoped to the present paper, those helper modules are
+omitted here.
+
+The logic specific to this paper's contributions is fully contained in
+the provided scripts:
+
+- **Content-hash audit and leakage-free splits** — `audit_manifest.py`,
+  `check_hashes.py`, `check_dex_header.py`, `check_determinism.py`,
+  `make_splits_final.py`, `make_ssl_splits.py`, `make_splits_random.py`
+- **Size-only baseline** — `size_only_baseline.py`,
+  `size_only_androdex.py`, `size_shift_under_obfuscation.py`
+- **Obfuscation measurement** — `measure_obfuscation_effect.py`,
+  `measure_androdex_signal.py`, `compare_resize.py`
+
+These scripts run independently of the omitted modules and reproduce the
+audit, the split protocol, the size-only baseline, and the obfuscation
+measurements. The full training pipeline, including the omitted helpers,
+will be released in de-anonymized form upon publication.
+
+
